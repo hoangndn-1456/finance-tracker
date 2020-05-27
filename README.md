@@ -21,4 +21,8 @@ Things you may want to cover:
 
 * Deployment instructions
 
+  * Add master_key to heroku
+`heroku config:set RAILS_MASTER_KEY=your-master-key`
+  * encrypted
+`heroku run EDITOR="nano" rails credentials:edit  `
 * ...

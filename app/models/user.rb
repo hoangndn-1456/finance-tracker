@@ -48,8 +48,8 @@ class User < ApplicationRecord
     where("#{field_name} like ?","%#{param}%")
   end
   
-  def friend_already_followed?(friend)
-    friends.where(id: friend.id).exists?
+  def friend_already_followed?(friend_id)
+    friends.where(id: friend_id).exists?
   end
 
   def except_current_user(users)

@@ -26,4 +26,33 @@ class User < ApplicationRecord
     return "#{first_name} #{last_name}" if first_name || last_name
     "No Name"
   end
+
+  def self.search(param)
+    search_result = (email_matches(param) + first_name_matches(param) + last_name_matches(param)).uniq
+    return search_result.empty? ? nil : search_result
+  end
+  
+  def self.email_matches(param)
+    matches('email', param)
+  end
+
+  def self.first_name_matches(param)
+    matches('first_name', param)
+  end
+
+  def self.last_name_matches(param)
+    matches('last_name', param)
+  end
+
+  def self.matches(field_name, param)
+    where("#{field_name} like ?","%#{param}%")
+  end
+  
+  def friend_already_followed?(friend)
+    friends.where(id: friend.id).exists?
+  end
+
+  def except_current_user(users)
+    users.reject { |user| user.id == self.id }
+  end
 end

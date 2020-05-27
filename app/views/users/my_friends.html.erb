@@ -1,5 +1,21 @@
 <h1>My Friends</h1>
-
+<div class='search-area'>
+  <h4>Search Friends</h4>
+  <%= form_tag search_friend_path, remote:true, method: :get do%>
+    <div class="form-group row">
+      <div class="col-sm-9 no-right-padding">
+        <%= text_field_tag :key_search, params[:key_search], placeholder: "Name or email", autofocus: true, class: "form-control form-control-lg"%>
+      </div>
+      <div class="col-sm-3 no-left-padding">
+        <%= button_tag type: :submit, class: "btn btn-success" do %>
+          <%= fa_icon 'search 2x' %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div id="friend-results">
+</div>
 <% if !@tracked_friends.empty? %>
   <%= render 'friend_ships/list'%>
 <% end %>
